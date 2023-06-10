@@ -6,6 +6,7 @@ import React, { useCallback, useState } from 'react';
 import MenuItem from './MenuItem';
 import { signOut } from 'next-auth/react';
 import { SafeUser } from '@/app/types';
+import { useRouter } from 'next/navigation';
 
 import useLoginModal from '@/app/hooks/useLoginModal';
 import useRegisterModal from '@/app/hooks/useRegisterModal';
@@ -18,6 +19,7 @@ interface UserMenuProps {
 const UserMenu: React.FC<UserMenuProps> = ({
   currentUser
 }) => {
+  const router = useRouter();
   const registerModal = useRegisterModal();
   const loginModal = useLoginModal();
   const rentModal = useRentModal();
@@ -100,34 +102,49 @@ const UserMenu: React.FC<UserMenuProps> = ({
             { currentUser ? (
               <>
                 <MenuItem
-                  onClick={() => {}}
+                  onClick={() => {
+                    router.push('/trips');
+                    toggleOpen();
+                  }}
                   label='My Trips'
                 />
 
                 <MenuItem
-                  onClick={() => {}}
+                  onClick={() => {
+                    router.push('/favorites');
+                    toggleOpen();
+                  }}
                   label='My Favorites'
                 />
 
                 <MenuItem
-                  onClick={() => {}}
+                  onClick={() => {
+                    router.push('/reservations');
+                    toggleOpen();
+                  }}
                   label='My Reservations'
                 />
 
                 <MenuItem
-                  onClick={() => {}}
+                  onClick={() => {
+                    router.push('/properties');
+                    toggleOpen();
+                  }}
                   label='My Properties'
                 />
 
                 <MenuItem
-                  onClick={rentModal.onOpen}
+                  onClick={() => {
+                    rentModal.onOpen();
+                    toggleOpen();
+                  }}
                   label='Airbnb my home'
                 />
 
                 <hr/>
 
                 <MenuItem
-                  onClick={() => signOut()}
+                  onClick={() => router.push('/')}
                   label='Logout'
                 />
               </>
