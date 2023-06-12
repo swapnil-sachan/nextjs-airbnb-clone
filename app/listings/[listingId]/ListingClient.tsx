@@ -41,8 +41,8 @@ const ListingClient: React.FC<ListingClientProps> = ({
 
     reservations.forEach((reservation: any) => {
       const range = eachDayOfInterval({
-        start: new Date(reservation.checkIn),
-        end: new Date(reservation.checkOut)
+        start: new Date(reservation.startDate),
+        end: new Date(reservation.endDate)
       });
 
       dates = [...dates, ...range];

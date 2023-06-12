@@ -33,8 +33,8 @@ export async function POST(
       reservations: {
         create: {
           userId: currentUser.id,
-          checkIn: startDate,
-          checkOut: endDate,
+          startDate: startDate,
+          endDate: endDate,
           totalPrice
         }
       }
